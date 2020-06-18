@@ -1,0 +1,8 @@
+import numpy as np
+import cv2
+from PIL import Image
+import pytesseract
+
+img = Image.open('F:/Data/GIS/pic6.jpg')
+
+print(pytesseract.image_to_string(img, config='--oem  6'))
