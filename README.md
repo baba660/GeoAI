@@ -1,2 +1,2 @@
 # GeoAI
-This is a set of simple AI & GeoSpatial  POC  - Python & OpenCV & ESRI - ArcObject 
+This is a set of sample  AI & GeoSpatial  POC  - Python & OpenCV & ESRI - ArcObject 
