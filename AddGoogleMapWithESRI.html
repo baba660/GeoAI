@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>  
+<head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+  <meta name="description" content="[Basemap gallery]">
+  <!-- 
+  ArcGIS API for JavaScript, https://js.arcgis.com
+  For more information about the widget_basemap sample, read the original sample description at developers.arcgis.com.
+  https://developers.arcgis.com/javascript/3/widget_basemap/index.html  
+  -->
+  <title>Add Google Map Basemap gallery</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/3.19/dijit/themes/claro/claro.css">    
+  <link rel="stylesheet" href="https://js.arcgis.com/3.19/esri/css/esri.css">
+  <style> 
+    html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+    #map{
+      padding:0;
+    }
+  </style> 
+  
+  <script src="https://js.arcgis.com/3.19/"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script> 
+    var map;
+    require([
+      "esri/map", "esri/dijit/BasemapGallery", "esri/arcgis/utils",
+      "dojo/parser",
+      "esri/dijit/Basemap",
+      "esri/dijit/BasemapLayer",
+
+      "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/TitlePane",
+      "dojo/domReady!"
+    ], function(
+      Map, BasemapGallery, arcgisUtils,
+      parser,Basemap,BasemapLayer
+    ) {
+      parser.parse();
+
+      map = new Map("map", {
+        basemap: "topo",
+        center: [-105.255, 40.022],
+        zoom: 13
+      });
+      
+      var basemapGallery = new BasemapGallery({
+        showArcGISBasemaps: true,
+        toggleReference: true,
+        map: map
+      }, "basemapGallery");
+      
+      var mapGMapSat = new Basemap({
+        layers: [new BasemapLayer({
+          type: "WebTiledLayer",
+          url : "https://mts1.google.com/vt/lyrs=s@186112443&hl=x-local&src=app&x={col}&y={row}&z={level}&s=Galile", 
+          copyright: "Google Maps"
+        })],
+        id: "gmapsat",
+        thumbnailUrl: "https://s3.amazonaws.com/images.seroundtable.com/google-jellyfishes-deep-urls-1643113294.png",
+        title: "Google Imagery"
+      });
+      basemapGallery.add(mapGMapSat);
+      
+      basemapGallery.startup();
+      
+      basemapGallery.on("error", function(msg) {
+        console.log("basemap gallery error:  ", msg);
+      });
+    });
+  </script> 
+</head> 
+
+<body class="claro"> 
+  <div data-dojo-type="dijit/layout/BorderContainer" 
+       data-dojo-props="design:'headline', gutters:false" 
+       style="width:100%;height:100%;margin:0;">
+
+    <div id="map" 
+         data-dojo-type="dijit/layout/ContentPane" 
+         data-dojo-props="region:'center'" 
+         style="padding:0;">
+
+      <div style="position:absolute; right:20px; top:10px; z-Index:999;">
+        <div data-dojo-type="dijit/TitlePane" 
+             data-dojo-props="title:'Switch Basemap', closable:false, open:false">
+          <div data-dojo-type="dijit/layout/ContentPane" style="width:380px; height:280px; overflow:auto;">
+            <div id="basemapGallery"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body> 
+
+</html>
