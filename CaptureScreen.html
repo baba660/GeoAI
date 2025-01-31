@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		How to take screenshot of
+		a div using JavaScript?
+	</title>
+
+	
+	<script src=
+"https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js">
+	</script>
+
+	
+
+	<style>
+		#photo {
+			border: 4px solid green;
+			padding: 4px;
+            background: green;
+		}
+
+        #photo1 {
+			border: 4px solid red;
+			padding: 4px;
+            background: red;
+		}
+
+        #photoMerge {
+			border: 4px solid rgba(179, 255, 0, 0.836);
+			padding: 4px;
+            background: rgb(179, 255, 0, 0.836);
+		}
+
+
+	</style>
+</head>
+
+<body>
+    <div id="photoMerge">
+
+        
+        <button onclick="takeshotMerge()">
+			Merge Screenshot
+		</button>
+   
+	<div id="photo">
+
+        <img src="https://lh5.googleusercontent.com/-XOGfvAHr7HQ/UvoUItkZMZI/AAAAAAAAHJk/IJz5JcUB9dw/w520-h274-no/scopes_in_directives.png" />
+		
+        
+        <button id="myButton">Click</button>
+
+		<button onclick="takeshot()">
+			1st Take Screenshot
+		</button>
+
+        
+	</div>
+
+    <div id="photo1">
+
+        <img id="myImg" src="https://www.w3schools.com/jsref/img_pulpit.jpg" alt="The Pulpit Rock" width="304" height="228">
+
+						
+		<button onclick="takeshot1()">
+			2nd Take Screenshot
+		</button>
+	</div>
+</div>
+	<h1>Screenshot: 1st </h1>
+	<div id="output"></div>
+    <h1>Screenshot: 2nd </h1>
+    <div id="output1"></div>
+
+    <h1>Screenshot: Merge </h1>
+    <div id="output_Merge"></div>
+
+	<script type="text/javascript">
+
+
+document.querySelector('#myButton').addEventListener('click', function() {
+    document.querySelector('#copy').html(document.querySelector('photo').html());
+});
+        
+
+        function takeshotMerge() {
+			
+
+            let MergeDiv= document.getElementById('photoMerge');
+
+			
+			html2canvas(MergeDiv).then(
+				function (canvas) {
+					document
+					.getElementById('output_Merge')
+					.appendChild(canvas);
+				})
+		}
+
+		
+		function takeshot() {
+
+            document.querySelector('#myButton').addEventListener('click', function() {
+    document.querySelector('#copy').html(document.querySelector('#photo').html());
+});
+
+			let div =
+				document.getElementById('photo');
+
+			
+			html2canvas(div).then(
+				function (canvas) {
+					document
+					.getElementById('output')
+					.appendChild(canvas);
+				})
+		}
+
+        function takeshot1() {
+			let div1 =
+				document.getElementById('photo1');
+
+			
+			html2canvas(div1).then(
+				function (canvas) {
+					document
+					.getElementById('output1')
+					.appendChild(canvas);
+				})
+		}
+	</script>
+</body>
+
+</html>
